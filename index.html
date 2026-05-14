@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lavandaria Pelicano — Especialistas em limpeza a seco de todo o tipo de vestuário. Porto, Rua da Natária 73." />
+  <title>Lavandaria Pelicano – Porto</title>
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+</head>
+<body>
+
+  <!-- ── NAV ───────────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <img src="assets/logotipo.png" alt="Pelicano" />
+      <div class="nav-brand">
+        <span class="brand-name">Lavandaria Pelicano</span>
+        <span class="brand-sub">Especialistas em limpeza</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Início</a></li>
+      <li><a href="servicos.html">Serviços & Preços</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="tel:228314574" class="nav-cta">228 314 574</a></li>
+    </ul>
+
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Início</a>
+    <a href="servicos.html" onclick="toggleMenu()">Serviços & Preços</a>
+    <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+    <a href="tel:228314574" style="color: var(--gold)">228 314 574</a>
+  </div>
+
+  <!-- ── HERO ───────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="assets/foto-interior.jpg" alt="Interior Lavandaria Pelicano" class="hero-bg-img" />
+      <div class="hero-azulejo"></div>
+    </div>
+
+    <div class="hero-content">
+
+      <div class="hero-badge fade-up">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Especialistas no Porto · Rua da Natária, 73
+      </div>
+
+      <h1 class="fade-up delay-1">
+        Especialistas em<br>
+        limpeza <em>a seco</em><br>
+        de todo o vestuário
+      </h1>
+
+      <p class="fade-up delay-2">
+        Tratamos das suas peças com o cuidado que merecem —
+        do vestuário do dia-a-dia às peças mais delicadas.
+        Peles, carpetes, têxteis lar e muito mais.
+      </p>
+
+      <div class="hero-actions fade-up delay-3">
+        <a href="servicos.html" class="btn-primary">Ver preços</a>
+        <a href="contacto.html" class="btn-outline btn-outline--light" style="color:#1a1508;">Contactar</a>
+      </div>
+
+      <div class="hero-stats fade-up delay-3">
+        <div class="hero-stat">
+          <span class="stat-value">4.3★</span>
+          <span class="stat-label">Google Reviews</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-value" data-dynamic="anos-exp">+50</span>
+          <span class="stat-label">Anos de experiência</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-value">Porto</span>
+          <span class="stat-label">Grande Porto</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de categoria -->
+    <div class="cat-modal" id="catModal">
+      <div class="cat-modal-img">
+        <img id="catModalImg" src="" alt="" />
+      </div>
+      <div class="cat-modal-info">
+        <span class="cat-modal-label" id="catModalLabel"></span>
+        <h3 class="cat-modal-title" id="catModalTitle"></h3>
+        <p class="cat-modal-desc" id="catModalDesc"></p>
+        <a class="cat-modal-link" id="catModalLink" href="#">Ver preços →</a>
+      </div>
+    </div>
+
+    <!-- Acordeão lado direito -->
+    <div class="hero-visual">
+      <div class="hero-acc-hint">
+        <span id="hintText">Clique numa categoria para saber mais</span>
+      </div>
+
+      <div class="hero-acc-item"
+        data-cat="vestuario"
+        data-img="assets/foto-vestuario.jpeg"
+        data-desc="Fatos, casacos, vestidos, camisas e muito mais. Tratamento especializado para cada peça."
+        data-link="servicos.html#vestuario">
+        <div class="hero-acc-header">
+          <div class="hero-acc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+          </div>
+          <span class="hero-acc-label">Vestuário</span>
+          <span class="hero-acc-price">Desde 3,00€</span>
+        </div>
+      </div>
+
+      <div class="hero-acc-item"
+        data-cat="peles"
+        data-img="assets/foto-peles.jpg"
+        data-desc="Antílope, couro, nobuk — lavar e pintar com tratamento especializado."
+        data-link="servicos.html#peles">
+        <div class="hero-acc-header">
+          <div class="hero-acc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+          </div>
+          <span class="hero-acc-label">Peles</span>
+          <span class="hero-acc-price">Desde 30,00€</span>
+        </div>
+      </div>
+
+      <div class="hero-acc-item"
+        data-cat="carpetes"
+        data-img="assets/foto-carpetes.jpg"
+        data-desc="Arraiolos, lã, perça e turcas. Tratamento anti-traça disponível."
+        data-link="servicos.html#carpetes">
+        <div class="hero-acc-header">
+          <div class="hero-acc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          </div>
+          <span class="hero-acc-label">Carpetes</span>
+          <span class="hero-acc-price">Desde 9€/kg</span>
+        </div>
+      </div>
+
+      <div class="hero-acc-item"
+        data-cat="neve"
+        data-img="assets/foto-neve.jpg"
+        data-desc="Blusões, macacões, calças e luvas para a época de inverno."
+        data-link="servicos.html#neve">
+        <div class="hero-acc-header">
+          <div class="hero-acc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="m20 6-8 4-8-4"/><path d="m20 18-8-4-8 4"/><path d="m2 12 10 4 10-4"/></svg>
+          </div>
+          <span class="hero-acc-label">Neve</span>
+          <span class="hero-acc-price">Desde 6,00€</span>
+        </div>
+      </div>
+
+      <div class="hero-acc-item"
+        data-cat="texteis"
+        data-img="assets/foto-texteis.jpg"
+        data-desc="Edredons, cortinados, colchas, mantas e roupa de cama."
+        data-link="servicos.html#texteis">
+        <div class="hero-acc-header">
+          <div class="hero-acc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+          </div>
+          <span class="hero-acc-label">Têxteis Lar</span>
+          <span class="hero-acc-price">Desde 4€/kg</span>
+        </div>
+      </div>
+
+      <div class="hero-acc-item"
+        data-cat="passar"
+        data-img="assets/fotos-passar.jpg"
+        data-desc="Engomadoria e secagem por peça ou por kg."
+        data-link="servicos.html#passar">
+        <div class="hero-acc-header">
+          <div class="hero-acc-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4 3 4 5 4 5"/><path d="M3 11h12a4 4 0 0 1 4 4v2H3z"/><path d="M3 11V5a2 2 0 0 1 2-2h3"/><line x1="3" y1="15" x2="19" y2="15"/></svg>
+          </div>
+          <span class="hero-acc-label">Só Passar</span>
+          <span class="hero-acc-price">Desde 2,00€</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROMOÇÃO ────────────────────────────────── -->
+  <div class="promo-banner">
+    <div class="promo-inner">
+      <div class="promo-label">Promoção da semana</div>
+      <div class="promo-items">
+        <div class="promo-item">
+          <span class="promo-name">Detergentes</span>
+          <span class="promo-price">8,50€ <small>(5 litros)</small></span>
+        </div>
+        <div class="promo-sep">·</div>
+        <div class="promo-item">
+          <span class="promo-name">Amaciadores</span>
+          <span class="promo-price">7,50€ <small>(5 litros)</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BENEFITS ────────────────────────────────── -->
+  <div class="benefits-bar">
+    <div class="benefit-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Mais de 50 anos de experiência</span>
+    </div>
+    <div class="benefit-dot"></div>
+    <div class="benefit-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Agente especializado em peles</span>
+    </div>
+    <div class="benefit-dot"></div>
+    <div class="benefit-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Recolhas e entregas no Grande Porto</span>
+    </div>
+    <div class="benefit-dot"></div>
+    <div class="benefit-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Orçamentos para clínicas e sinistros</span>
+    </div>
+  </div>
+
+  <!-- ── STATS ───────────────────────────────────── -->
+  <section class="stats-section reveal">
+    <div class="stats-card">
+      <div class="stat-block">
+        <div class="stat-number">4.3★</div>
+        <div class="stat-desc">Avaliação Google</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-block">
+        <div class="stat-number" data-dynamic="anos-exp">+50</div>
+        <div class="stat-desc">Anos de experiência</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-block">
+        <div class="stat-number">6</div>
+        <div class="stat-desc">Categorias de serviço</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-block">
+        <div class="stat-number">Porto</div>
+        <div class="stat-desc">Grande Porto</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVIÇOS RESUMO ───────────────────────── -->
+  <section class="servicos-resumo">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">O que tratamos</div>
+      <h2 class="section-title">Os Nossos Serviços</h2>
+    </div>
+
+    <div class="servicos-grid">
+
+      <a href="servicos.html#vestuario" class="servico-card reveal">
+        <div class="servico-icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+        </div>
+        <h3>Vestuário</h3>
+        <p>Fatos, casacos, vestidos, camisas e muito mais. Desde 3,00€.</p>
+        <span class="servico-link">Ver preços →</span>
+      </a>
+
+      <a href="servicos.html#peles" class="servico-card reveal">
+        <div class="servico-icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <h3>Peles</h3>
+        <p>Antílope, couro, nobuk — lavar e pintar com tratamento especializado.</p>
+        <span class="servico-link">Ver preços →</span>
+      </a>
+
+      <a href="servicos.html#carpetes" class="servico-card reveal">
+        <div class="servico-icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Carpetes</h3>
+        <p>Arraiolos, lã, perça e turcas. Tratamento anti-traça disponível.</p>
+        <span class="servico-link">Ver preços →</span>
+      </a>
+
+      <a href="servicos.html#neve" class="servico-card reveal">
+        <div class="servico-icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        </div>
+        <h3>Roupa de Neve</h3>
+        <p>Blusões, macacões, calças e luvas para a época de inverno.</p>
+        <span class="servico-link">Ver preços →</span>
+      </a>
+
+      <a href="servicos.html#texteis" class="servico-card reveal">
+        <div class="servico-icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Têxteis Lar</h3>
+        <p>Edredons, cortinados, colchas, mantas e roupa de cama.</p>
+        <span class="servico-link">Ver preços →</span>
+      </a>
+
+      <a href="servicos.html#passar" class="servico-card reveal">
+        <div class="servico-icon-svg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <h3>Só Passar / Secar</h3>
+        <p>Serviço de engomadoria e secagem. Desde 2,00€ por peça.</p>
+        <span class="servico-link">Ver preços →</span>
+      </a>
+
+    </div>
+
+    <div class="servicos-cta reveal">
+      <a href="servicos.html" class="btn-primary">Ver tabela de preços completa</a>
+    </div>
+  </section>
+
+  <!-- ── PORQUÊ NÓS ──────────────────────────────── -->
+  <section class="porque-nos">
+    <div class="porque-header reveal">
+      <div class="section-eyebrow" style="color:var(--gold-light)">A nossa diferença</div>
+      <h2 class="section-title" style="color:var(--white)">Porquê escolher<br>a <em style="font-style:italic;color:var(--gold)">Pelicano?</em></h2>
+    </div>
+
+    <div class="porque-lista">
+
+      <div class="porque-item reveal">
+        <div class="porque-num">01</div>
+        <div class="porque-content">
+          <div class="porque-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div class="porque-text">
+            <h3>Meio século de história</h3>
+            <p>Desde <span data-dynamic="fundacao">1974</span> que servimos o Porto com dedicação. Mais de <span data-dynamic="anos-exp">50</span> anos de experiência fazem de nós os mais antigos especialistas da cidade.</p>
+          </div>
+          <div class="porque-tag" data-dynamic="fundacao">1974</div>
+        </div>
+      </div>
+
+      <div class="porque-item reveal">
+        <div class="porque-num">02</div>
+        <div class="porque-content">
+          <div class="porque-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="porque-text">
+            <h3>Sempre disponíveis</h3>
+            <p data-dynamic="horario-porque">Abertos de segunda a sexta das 08:30 às 20:00 sem paragem para almoço. Porque sabemos que a vida não pára.</p>
+          </div>
+          <div class="porque-tag" data-dynamic="horario-tag">08:30–20:00</div>
+        </div>
+      </div>
+
+      <div class="porque-item reveal">
+        <div class="porque-num">03</div>
+        <div class="porque-content">
+          <div class="porque-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+          </div>
+          <div class="porque-text">
+            <h3>Agentes especializados em peles</h3>
+            <p>Antílope, couro, nobuk — tratamos as suas peças mais valiosas com técnicas e produtos específicos para cada tipo de material.</p>
+          </div>
+          <div class="porque-tag">Peles</div>
+        </div>
+      </div>
+
+      <div class="porque-item reveal">
+        <div class="porque-num">04</div>
+        <div class="porque-content">
+          <div class="porque-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="porque-text">
+            <h3>Vamos até si</h3>
+            <p>Recolhemos e entregamos na zona do Grande Porto. As suas peças tratadas sem sair de casa — conforto total.</p>
+          </div>
+          <div class="porque-tag">Porto</div>
+        </div>
+      </div>
+
+      <div class="porque-item reveal">
+        <div class="porque-num">05</div>
+        <div class="porque-content">
+          <div class="porque-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="porque-text">
+            <h3>4.5 estrelas no Google</h3>
+            <p>A nossa reputação construída ao longo de décadas reflete-se nas avaliações dos clientes. Qualidade que se vê e se sente.</p>
+          </div>
+          <div class="porque-tag">4.5★</div>
+        </div>
+      </div>
+
+      <div class="porque-item reveal">
+        <div class="porque-num">06</div>
+        <div class="porque-content">
+          <div class="porque-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div class="porque-text">
+            <h3>Pague como preferir</h3>
+            <p><span data-dynamic="pagamentos">MBWay, dinheiro ou transferência bancária</span>. Flexibilidade total para a sua comodidade.</p>
+          </div>
+          <div class="porque-tag" data-dynamic="pagamentos">MBWay</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA + ORÇAMENTO ─────────────────────────── -->
+  <section class="cta-orcamento reveal">
+    <div class="cta-orc-inner">
+
+      <div class="cta-orc-left">
+        <div class="section-eyebrow">Fale connosco</div>
+        <h2 class="section-title">Pronto para confiar-nos<br>as suas peças?</h2>
+        <p class="cta-orc-desc">Recolhas e entregas na zona do Grande Porto.<br>Orçamentos sem compromisso para empresas e particulares.</p>
+
+        <div class="cta-orc-actions">
+          <a href="tel:228314574" class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            228 314 574
+          </a>
+          <a href="contacto.html" class="btn-outline">Enviar mensagem</a>
+        </div>
+
+        <div class="orc-lista">
+          <div class="section-eyebrow" style="margin-top:40px">Fazemos orçamentos para</div>
+          <ul class="orcamento-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Clínicas
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              Recuperações por incêndio
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              Acidentes por inundação
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Particulares
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-orc-right">
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div>
+            <strong>Entregas ao domicílio</strong>
+            <p>Recolhas e entregas na zona do Grande Porto</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <strong>Horário</strong>
+            <p data-dynamic="horario">Segunda a Sexta · 08:30 — 20:00<br>
+            <small style="font-size:0.75rem;color:var(--grey)">Sem paragem para almoço</small></p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <strong>Telefone</strong>
+            <p><a href="tel:228314574">228 314 574</a></p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div>
+            <strong>Formas de pagamento</strong>
+            <p data-dynamic="pagamentos">MBWay · Dinheiro · Transferência</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <strong>Localização</strong>
+            <p data-dynamic="morada">Rua da Natária, 73 · Porto</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────── -->
+  <footer>
+    <span>© 2026 Lavandaria Pelicano · Porto</span>
+    <span>
+      <a href="tel:228314574">228 314 574</a> ·
+      <a href="mailto:lavandariapelicano@gmail.com">lavandariapelicano@gmail.com</a> ·
+      <a href="https://www.facebook.com/lavandaria.pelicano" target="_blank">Facebook</a>
+    </span>
+  </footer>
+
+  <script>
+    const CATEGORY_DATA = {
+      vestuario: { label: 'Vestuário', title: 'Vestuário & Moda' },
+      peles:     { label: 'Peles', title: 'Peles & Couro' },
+      carpetes:  { label: 'Carpetes', title: 'Carpetes & Tapetes' },
+      neve:      { label: 'Neve', title: 'Roupa de Neve' },
+      texteis:   { label: 'Têxteis Lar', title: 'Têxteis para o Lar' },
+      passar:    { label: 'Só Passar', title: 'Engomadoria & Secagem' },
+    };
+
+    const modal       = document.getElementById('catModal');
+    const heroContent = document.querySelector('.hero-content');
+    const modalImg    = document.getElementById('catModalImg');
+    const modalLabel  = document.getElementById('catModalLabel');
+    const modalTitle  = document.getElementById('catModalTitle');
+    const modalDesc   = document.getElementById('catModalDesc');
+    const modalLink   = document.getElementById('catModalLink');
+
+    let hideTimeout;
+
+    document.querySelectorAll('.hero-acc-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+        const cat  = item.dataset.cat;
+        const data = CATEGORY_DATA[cat];
+
+        modalImg.src           = item.dataset.img;
+        modalImg.alt           = data.label;
+        modalLabel.textContent = data.label;
+        modalTitle.textContent = data.title;
+        modalDesc.textContent  = item.dataset.desc;
+        modalLink.href         = item.dataset.link;
+
+        modal.classList.add('visible');
+        heroContent.classList.add('blurred');
+      });
+
+      item.addEventListener('mouseleave', () => {
+        hideTimeout = setTimeout(() => {
+          modal.classList.remove('visible');
+          heroContent.classList.remove('blurred');
+        }, 100);
+      });
+    });
+
+    modal.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+    modal.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        modal.classList.remove('visible');
+        heroContent.classList.remove('blurred');
+      }, 100);
+    });
+
+    // Hint rotativo
+    const hints = [
+      'Clique numa categoria para saber mais →',
+      'Descubra os nossos preços →',
+      'Que peça precisa de tratar? →',
+      'Selecione um serviço →',
+    ];
+    let hintIdx = 0;
+    const hintEl = document.getElementById('hintText');
+    hintEl.style.transition = 'opacity 0.3s ease';
+    setInterval(() => {
+      hintEl.style.opacity = '0';
+      setTimeout(() => {
+        hintIdx = (hintIdx + 1) % hints.length;
+        hintEl.textContent = hints[hintIdx];
+        hintEl.style.opacity = '';
+      }, 300);
+    }, 2500);
+  </script>
+
+  <script src="js/nav.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <!-- config.js lê do JSONBin e aplica dados dinamicamente -->
+  <script src="js/config.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contacte a Lavandaria Pelicano — Rua da Natária 73, Porto. Telefone, email, mapa e formulário de contacto." />
+  <title>Contacto – Lavandaria Pelicano</title>
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/contacto.css" />
+</head>
+<body>
+
+  <!-- ── NAV ───────────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+<img src="assets/logotipo.png" alt="Pelicano" />     
+      <div class="nav-brand">
+        <span class="brand-name">Lavandaria Pelicano</span>
+        <span class="brand-sub">Especialistas em limpeza</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="servicos.html">Serviços & Preços</a></li>
+      <li><a href="contacto.html" class="active">Contacto</a></li>
+      <li><a href="tel:228314574" class="nav-cta">228 314 574</a></li>
+    </ul>
+
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" onclick="toggleMenu()">Início</a>
+    <a href="servicos.html" onclick="toggleMenu()">Serviços & Preços</a>
+    <a href="contacto.html" onclick="toggleMenu()">Contacto</a>
+    <a href="tel:228314574" style="color: var(--gold)">228 314 574</a>
+  </div>
+
+  <!-- ── PAGE HEADER ────────────────────────────── -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="section-eyebrow">Fale connosco</div>
+      <h1>Contacto</h1>
+      <p>Estamos disponíveis para responder a todas as suas questões.<br>
+         Recolhas e entregas na zona do Grande Porto.</p>
+    </div>
+  </div>
+
+  <!-- ── MAIN ───────────────────────────────────── -->
+  <section class="contacto-section">
+    <div class="contacto-grid">
+
+      <!-- Coluna esquerda: info + formulário -->
+      <div class="contacto-left">
+
+        <!-- Info cards -->
+        <div class="info-grid">
+
+          <a href="tel:228314574" class="info-card">
+            <div class="info-card-icon">📞</div>
+            <div class="info-card-text">
+              <span class="info-label">Telefone</span>
+              <span class="info-value">228 314 574</span>
+            </div>
+          </a>
+
+          <a href="mailto:lavandariapelicano@gmail.com" class="info-card">
+            <div class="info-card-icon">✉️</div>
+            <div class="info-card-text">
+              <span class="info-label">Email</span>
+              <span class="info-value">lavandariapelicano@gmail.com</span>
+            </div>
+          </a>
+
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <div class="info-card-text">
+              <span class="info-label">Morada</span>
+              <span class="info-value">Rua da Natária, 73<br>4250-327 Porto</span>
+            </div>
+          </div>
+
+          <a href="https://www.facebook.com/lavandaria.pelicano" target="_blank" class="info-card">
+            <div class="info-card-icon">📘</div>
+            <div class="info-card-text">
+              <span class="info-label">Facebook</span>
+              <span class="info-value">lavandaria.pelicano</span>
+            </div>
+          </a>
+
+          <div class="info-card info-card--wide">
+            <div class="info-card-icon">🚗</div>
+            <div class="info-card-text">
+              <span class="info-label">Entregas ao domicílio</span>
+              <span class="info-value">Recolhas e entregas na zona do Grande Porto</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Formulário -->
+        <div class="form-wrapper">
+          <h2>Enviar mensagem</h2>
+          <p>Preencha o formulário e respondemos o mais brevemente possível.</p>
+
+          <form id="contactForm" class="contact-form">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" placeholder="O seu nome" required />
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="9xx xxx xxx" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="o.seu@email.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="assunto">Assunto</label>
+              <select id="assunto" name="assunto">
+                <option value="">Selecione um assunto</option>
+                <option value="orcamento">Pedido de orçamento</option>
+                <option value="recolha">Recolha ao domicílio</option>
+                <option value="informacao">Informação sobre serviços</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" rows="5"
+                placeholder="Descreva o que precisa..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary form-submit">
+              Enviar mensagem
+            </button>
+
+            <div class="form-success" id="formSuccess">
+              ✓ Mensagem enviada com sucesso! Entraremos em contacto brevemente.
+            </div>
+            <div class="form-error" id="formError">
+              Ocorreu um erro. Por favor tente novamente ou contacte-nos por telefone.
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Coluna direita: mapa -->
+      <div class="contacto-right">
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3003.8!2d-8.6394!3d41.1709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2464f6d54a6457%3A0x0!2sRua+da+Nat%C3%A1ria+73%2C+Porto!5e0!3m2!1spt!2spt!4v1"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização Lavandaria Pelicano">
+          </iframe>
+        </div>
+
+        <div class="map-address">
+          <strong>Lavandaria Pelicano</strong>
+          <span>Rua da Natária, 73 (ao Carvalhido)</span>
+          <span>4250-327 Porto</span>
+          <a href="https://maps.google.com/?q=Rua+da+Natária+73+Porto"
+             target="_blank" class="directions-link">
+            Como chegar →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────── -->
+ <footer>
+  <span>© 2025 Lavandaria Pelicano · Fundada em 1974 · Porto</span>
+  <span>
+    Seg–Sex 08:30–20:00 ·
+    <a href="tel:228314574">228 314 574</a> ·
+    <a href="mailto:lavandariapelicano@gmail.com">lavandariapelicano@gmail.com</a> ·
+    <a href="https://www.facebook.com/lavandaria.pelicano" target="_blank">Facebook</a>
+  </span>
+</footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/contacto.js"></script>
+   <script src="js/whatsapp.js"></script>
+
+</body>
+</html>

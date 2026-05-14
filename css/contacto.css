@@ -1,0 +1,309 @@
+/* ── PAGE HEADER ──────────────────────────────── */
+.page-header {
+  background: var(--navy);
+  padding: 140px 64px 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/azulejos.jpg');
+  background-repeat: repeat;
+  background-size: 500px;
+  opacity: 0.06;
+  z-index: 0;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 100% 50%, rgba(201,168,76,0.07), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page-header-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.page-header h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── SECTION ──────────────────────────────────── */
+.contacto-section {
+  padding: 80px 64px 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contacto-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/azulejos.jpg');
+  background-repeat: repeat;
+  background-size: 500px;
+  opacity: 2;
+  z-index: 0;
+}
+.contacto-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.93) 0%, rgb(255, 251, 235) 50%, rgba(223, 196, 122, 0.91) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── INFO CARDS ───────────────────────────────── */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 52px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--light-grey);
+  border-radius: 6px;
+  padding: 24px 26px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--navy);
+  transition: border-color var(--transition), transform var(--transition);
+  backdrop-filter: blur(4px);
+}
+
+.info-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.info-card--wide {
+  grid-column: 1 / -1;
+}
+
+.info-card-icon {
+  font-size: 1.4rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.info-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.info-value {
+  font-size: 0.95rem;
+  color: var(--navy);
+  line-height: 1.6;
+}
+
+/* ── FORMULÁRIO ───────────────────────────────── */
+.form-wrapper h2 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.form-wrapper > p {
+  font-size: 0.92rem;
+  color: var(--grey);
+  margin-bottom: 32px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 13px 16px;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.85);
+  outline: none;
+  transition: border-color var(--transition);
+  resize: vertical;
+  backdrop-filter: blur(4px);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  background: var(--white);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--grey);
+  font-weight: 300;
+}
+
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  font-size: 0.88rem;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.form-success {
+  display: none;
+  padding: 14px 18px;
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  border-radius: 4px;
+  color: #065f46;
+  font-size: 0.88rem;
+}
+
+.form-error {
+  display: none;
+  padding: 14px 18px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  color: #991b1b;
+  font-size: 0.88rem;
+}
+
+/* ── MAPA ─────────────────────────────────────── */
+.contacto-right {
+  position: sticky;
+  top: 90px;
+}
+
+.map-wrapper {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--light-grey);
+  height: 440px;
+}
+
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.map-address {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.map-address strong {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.map-address span {
+  font-size: 0.92rem;
+  color: var(--grey);
+}
+
+.directions-link {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.directions-link:hover { opacity: 0.7; }
+
+/* ── RESPONSIVE ───────────────────────────────── */
+@media (max-width: 1100px) {
+  .contacto-grid { gap: 48px; }
+}
+
+@media (max-width: 900px) {
+  .contacto-section { padding: 50px 20px 70px; }
+  .contacto-grid { grid-template-columns: 1fr; gap: 48px; }
+  .contacto-right { position: static; }
+  .page-header { padding: 110px 20px 50px; }
+  .map-wrapper { height: 320px; }
+}
+
+@media (max-width: 500px) {
+  .info-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Painel de Administração — Lavandaria Pelicano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --escuro: #1a1508;
+      --dourado: #d4a017;
+      --dourado-claro: #e8b84b;
+      --cream: #faf6ee;
+      --cream-dark: #f0e8d8;
+      --vermelho: #c0392b;
+      --verde: #27ae60;
+      --azul: #2980b9;
+      --cinzento: #6b7280;
+      --borda: #e2d5bb;
+      --sombra: 0 2px 12px rgba(26,21,8,0.08);
+      --sombra-forte: 0 8px 32px rgba(26,21,8,0.16);
+      --radius: 10px;
+      --radius-lg: 16px;
+      --font-titulo: 'Cormorant Garamond', serif;
+      --font-corpo: 'DM Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-corpo);
+      background: #f5f0e8;
+      color: var(--escuro);
+      min-height: 100vh;
+    }
+
+    /* ─── LOGIN ─── */
+    #login-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--escuro);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 0;
+    }
+
+    .login-box {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      width: 100%; max-width: 400px;
+      box-shadow: var(--sombra-forte);
+      text-align: center;
+    }
+
+    .login-logo {
+      font-family: var(--font-titulo);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--escuro);
+      margin-bottom: 4px;
+    }
+
+    .login-sub {
+      font-size: 0.8rem;
+      color: var(--cinzento);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .login-box label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--cinzento);
+      text-align: left;
+      margin-bottom: 6px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--borda);
+      border-radius: var(--radius);
+      font-family: var(--font-corpo);
+      font-size: 1rem;
+      color: var(--escuro);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .login-box input[type="password"]:focus { border-color: var(--dourado); }
+
+    .btn-login {
+      width: 100%;
+      padding: 13px;
+      background: var(--dourado);
+      color: var(--escuro);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-corpo);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-login:hover { background: var(--dourado-claro); }
+    .btn-login:active { transform: scale(0.98); }
+
+    .login-erro {
+      margin-top: 12px;
+      color: var(--vermelho);
+      font-size: 0.85rem;
+      min-height: 20px;
+    }
+
+    /* ─── HEADER ─── */
+    .admin-header {
+      background: var(--escuro);
+      color: var(--cream);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0; z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+
+    .header-logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .header-logo-icon {
+      width: 36px; height: 36px;
+      background: var(--dourado);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .header-logo-text {
+      font-family: var(--font-titulo);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .header-logo-badge {
+      font-size: 0.68rem;
+      background: rgba(212,160,23,0.2);
+      color: var(--dourado);
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(212,160,23,0.3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .status-indicator {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #6b7280;
+      transition: background 0.3s;
+    }
+
+    .status-dot.ok { background: var(--verde); }
+    .status-dot.saving { background: var(--dourado); animation: pulse 1s infinite; }
+    .status-dot.erro { background: var(--vermelho); }
+
+    @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:0.4 } }
+
+    .btn-sair {
+      padding: 7px 16px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      border-radius: 7px;
+      font-family: var(--font-corpo);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-sair:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    /* ─── LAYOUT ─── */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      background: white;
+      border-right: 1px solid var(--borda);
+      padding: 24px 0;
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+
+    .sidebar-section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cinzento);
+      padding: 16px 20px 8px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      font-size: 0.88rem;
+      color: var(--escuro);
+      user-select: none;
+    }
+
+    .sidebar-item:hover {
+      background: var(--cream);
+      border-left-color: var(--borda);
+    }
+
+    .sidebar-item.active {
+      background: #fdf7e8;
+      border-left-color: var(--dourado);
+      color: #8a6200;
+      font-weight: 500;
+    }
+
+    .sidebar-icon {
+      font-size: 1.1rem;
+      width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--borda);
+      margin: 12px 20px;
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main-content {
+      padding: 32px;
+      overflow-y: auto;
+    }
+
+    .section-panel {
+      display: none;
+    }
+
+    .section-panel.active {
+      display: block;
+    }
+
+    /* ─── PAGE TITLE ─── */
+    .page-title {
+      margin-bottom: 28px;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-titulo);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--escuro);
+      line-height: 1.1;
+    }
+
+    .page-title p {
+      color: var(--cinzento);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 20px;
+      border: 1px solid var(--borda);
+      box-shadow: var(--sombra);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .card-title {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--escuro);
+    }
+
+    .card-title-icon {
+      font-size: 1.2rem;
+    }
+
+    /* ─── FORM ELEMENTS ─── */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--cinzento);
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .label-hint {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 4px;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="time"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--borda);
+      border-radius: var(--radius);
+      font-family: var(--font-corpo);
+      font-size: 0.92rem;
+      color: var(--escuro);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--dourado);
+      box-shadow: 0 0 0 3px rgba(212,160,23,0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    input[type="color"] {
+      width: 48px; height: 40px;
+      border: 1.5px solid var(--borda);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 3px;
+      background: white;
+    }
+
+    .color-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .color-hex {
+      flex: 1;
+    }
+
+    /* ─── TOGGLE ─── */
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .toggle-group:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-info strong {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--escuro);
+    }
+
+    .toggle-info span {
+      font-size: 0.8rem;
+      color: var(--cinzento);
+    }
+
+    .toggle {
+      position: relative;
+      width: 48px; height: 26px;
+      flex-shrink: 0;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute; inset: 0;
+      background: #d1d5db;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      left: 3px; top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle input:checked + .toggle-slider { background: var(--verde); }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(22px); }
+
+    /* ─── TABELA DE PREÇOS ─── */
+    .preco-categoria {
+      margin-bottom: 24px;
+    }
+
+    .preco-cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--cream);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--escuro);
+      border: 1px solid var(--borda);
+      user-select: none;
+    }
+
+    .preco-cat-header .cat-toggle {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--cinzento);
+    }
+
+    .preco-cat-body {
+      display: grid;
+      gap: 10px;
+    }
+
+    .preco-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #fafafa;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+    }
+
+    .preco-item-nome {
+      font-size: 0.88rem;
+      color: var(--escuro);
+    }
+
+    .preco-input-wrap {
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .preco-input-wrap span {
+      font-size: 0.85rem;
+      color: var(--cinzento);
+    }
+
+    .preco-input {
+      width: 80px !important;
+      text-align: right;
+    }
+
+    .btn-remover-item {
+      background: none;
+      border: none;
+      color: #dc2626;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background 0.15s;
+      line-height: 1;
+    }
+
+    .btn-remover-item:hover { background: #fee2e2; }
+
+    .btn-add-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--cream);
+      border: 1.5px dashed var(--borda);
+      border-radius: 8px;
+      font-family: var(--font-corpo);
+      font-size: 0.82rem;
+      color: var(--cinzento);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .btn-add-item:hover {
+      border-color: var(--dourado);
+      color: var(--escuro);
+      background: #fdf7e8;
+    }
+
+    /* ─── BOTÕES GERAIS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-family: var(--font-corpo);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--dourado);
+      color: var(--escuro);
+    }
+
+    .btn-primary:hover { background: var(--dourado-claro); }
+
+    .btn-secondary {
+      background: white;
+      color: var(--escuro);
+      border: 1.5px solid var(--borda);
+    }
+
+    .btn-secondary:hover { border-color: var(--dourado); }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+    }
+
+    .btn-danger:hover { background: #fecaca; }
+
+    .btn-success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+
+    .btn-grande {
+      padding: 13px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .btn-guardar-tudo {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      padding: 14px 28px;
+      background: var(--dourado);
+      color: var(--escuro);
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font-corpo);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212,160,23,0.4);
+      transition: all 0.2s;
+      z-index: 50;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .btn-guardar-tudo:hover {
+      background: var(--dourado-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(212,160,23,0.5);
+    }
+
+    .btn-guardar-tudo:active { transform: translateY(0); }
+
+    .btn-guardar-tudo:disabled {
+      opacity: 0.7; cursor: not-allowed; transform: none;
+    }
+
+    /* ─── ALERTAS ─── */
+    .alert {
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+
+    .alert-erro {
+      background: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+    }
+
+    .alert-info {
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+    }
+
+    .alert-aviso {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+    }
+
+    /* ─── STATS (dashboard) ─── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--sombra);
+    }
+
+    .stat-icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-valor {
+      font-family: var(--font-titulo);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--escuro);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--cinzento);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── PROMOÇÃO PREVIEW ─── */
+    .promo-preview {
+      background: var(--escuro);
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-top: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .promo-preview-badge {
+      background: var(--dourado);
+      color: var(--escuro);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .promo-preview-text {
+      color: white;
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    /* ─── HORÁRIO ─── */
+    .horario-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .horario-linha {
+      display: grid;
+      grid-template-columns: 140px 1fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .horario-dia {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--escuro);
+    }
+
+    .horario-fechado {
+      font-size: 0.8rem;
+      color: var(--cinzento);
+      font-style: italic;
+    }
+
+    /* ─── NOTIFICAÇÃO TOAST ─── */
+    .toast-container {
+      position: fixed;
+      top: 80px; right: 20px;
+      z-index: 9999;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .toast {
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      box-shadow: var(--sombra-forte);
+      animation: slideIn 0.3s ease;
+      display: flex; align-items: center; gap: 8px;
+      min-width: 260px;
+    }
+
+    .toast-ok { background: #065f46; color: white; }
+    .toast-erro { background: #dc2626; color: white; }
+    .toast-info { background: var(--escuro); color: white; }
+
+    @keyframes slideIn {
+      from { transform: translateX(110%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(110%); opacity: 0; }
+    }
+
+    /* ─── MISC ─── */
+    .divider { height: 1px; background: var(--cream-dark); margin: 20px 0; }
+    .text-muted { color: var(--cinzento); font-size: 0.85rem; }
+    .flex { display: flex; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .mt-2 { margin-top: 8px; }
+    .mt-3 { margin-top: 16px; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .badge-verde { background: #d1fae5; color: #065f46; }
+    .badge-vermelho { background: #fee2e2; color: #dc2626; }
+    .badge-cinza { background: #f3f4f6; color: #6b7280; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .admin-layout { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; top: 0; }
+      .main-content { padding: 20px 16px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .form-row, .form-row-3 { grid-template-columns: 1fr; }
+      .btn-guardar-tudo { bottom: 16px; right: 16px; }
+    }
+
+    /* ─── LOADING OVERLAY ─── */
+    .loading-overlay {
+      position: fixed; inset: 0; z-index: 9998;
+      background: rgba(26,21,8,0.5);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .loading-box {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 32px 40px;
+      text-align: center;
+      box-shadow: var(--sombra-forte);
+    }
+
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--borda);
+      border-top-color: var(--dourado);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-box p {
+      font-size: 0.9rem;
+      color: var(--cinzento);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ LOGIN ═══════════════ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🦢 Pelicano</div>
+    <div class="login-sub">Painel de Administração</div>
+    <label for="pass-input">Palavra-passe</label>
+    <input type="password" id="pass-input" placeholder="••••••••••" autocomplete="current-password" />
+    <button class="btn-login" onclick="tentarLogin()">Entrar no Painel</button>
+    <div class="login-erro" id="login-erro"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ LOADING ═══════════════ -->
+<div class="loading-overlay" id="loading-overlay" style="display:none">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p id="loading-msg">A carregar dados...</p>
+  </div>
+</div>
+
+<!-- ═══════════════ TOAST ═══════════════ -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="admin-header">
+  <div class="header-logo">
+    <div class="header-logo-icon">🦢</div>
+    <span class="header-logo-text">Lavandaria Pelicano</span>
+    <span class="header-logo-badge">Admin</span>
+  </div>
+  <div class="header-actions">
+    <div class="status-indicator">
+      <div class="status-dot" id="status-dot"></div>
+      <span id="status-text">A ligar...</span>
+    </div>
+    <button class="btn-sair" onclick="sair()">⏻ Sair</button>
+  </div>
+</header>
+
+<!-- ═══════════════ LAYOUT ═══════════════ -->
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section-label">Principal</div>
+    <div class="sidebar-item active" onclick="irPara('dashboard')">
+      <span class="sidebar-icon">📊</span> Dashboard
+    </div>
+    <div class="sidebar-item" onclick="irPara('promocao')">
+      <span class="sidebar-icon">🏷️</span> Promoção do Mês
+    </div>
+    <div class="sidebar-item" onclick="irPara('precos')">
+      <span class="sidebar-icon">💶</span> Preços
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- ─── DASHBOARD ─── -->
+    <section class="section-panel active" id="panel-dashboard">
+      <div class="page-title">
+        <h1>Bem-vindo, Chefe! 👋</h1>
+        <p>Tudo o que precisa para gerir o site da Lavandaria Pelicano num só sítio.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🗓️</div>
+          <div class="stat-valor" id="stat-ano">1974</div>
+          <div class="stat-label">Ano de fundação</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-valor">4.5</div>
+          <div class="stat-label">Avaliação Google</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💶</div>
+          <div class="stat-valor" id="stat-num-precos">–</div>
+          <div class="stat-label">Artigos com preço</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">☁️</div>
+          <div class="stat-valor" id="stat-sync">–</div>
+          <div class="stat-label">Última sincronização</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-icon">🚀</span> Guia Rápido</div>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div style="padding:16px; background:var(--cream); border-radius:10px; border:1px solid var(--borda);">
+            <strong style="font-size:0.9rem;">Mudar uma promoção?</strong>
+            <p class="text-muted" style="margin-top:4px; font-size:0.82rem;">Vá a <b>🏷️ Promoção do Mês</b> → edite o texto → carregue em <b>Guardar Tudo</b>.</p>
+          </div>
+          <div style="padding:16px; background:var(--cream); border-radius:10px; border:1px solid var(--borda);">
+            <strong style="font-size:0.9rem;">Actualizar um preço?</strong>
+            <p class="text-muted" style="margin-top:4px; font-size:0.82rem;">Vá a <b>💶 Preços</b> → encontre o artigo → altere o valor → carregue em <b>Guardar Tudo</b>.</p>
+          </div>
+          <div style="padding:16px; background:var(--cream); border-radius:10px; border:1px solid var(--borda);">
+            <strong style="font-size:0.9rem;">Mudar o horário?</strong>
+            <p class="text-muted" style="margin-top:4px; font-size:0.82rem;">Vá a <b>🕐 Horário</b> → ajuste as horas → carregue em <b>Guardar Tudo</b>.</p>
+          </div>
+          <div style="padding:16px; background:var(--cream); border-radius:10px; border:1px solid var(--borda);">
+            <strong style="font-size:0.9rem;">Actualizar contactos?</strong>
+            <p class="text-muted" style="margin-top:4px; font-size:0.82rem;">Vá a <b>📞 Contactos</b> → edite o que precisar → carregue em <b>Guardar Tudo</b>.</p>
+          </div>
+        </div>
+        <div class="alert alert-aviso mt-3">
+          <span>⚠️</span>
+          <span>Depois de guardar, espere 1–2 minutos para o site actualizar em todos os dispositivos.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span>🔗</span> Links Úteis</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="/" target="_blank" class="btn btn-secondary">👁️ Ver Site Público</a>
+          <a href="/servicos.html" target="_blank" class="btn btn-secondary">🧺 Serviços</a>
+          <a href="/contacto.html" target="_blank" class="btn btn-secondary">📞 Contacto</a>
+          <a href="https://www.facebook.com/lavandaria.pelicano" target="_blank" class="btn btn-secondary">📘 Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROMOÇÃO ─── -->
+    <section class="section-panel" id="panel-promocao">
+      <div class="page-title">
+        <h1>🏷️ Promoção da Semana</h1>
+        <p>A faixa dourada que aparece no topo do site. Pode ter até 2 produtos em destaque.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span>🏷️</span> Faixa de Promoção</div>
+          <label class="toggle" style="margin:0">
+            <input type="checkbox" id="promo-ativa" onchange="atualizarPreviewPromo()" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>Etiqueta (texto pequeno à esquerda)</label>
+          <input type="text" id="promo-badge" placeholder="ex: Promoção da semana" oninput="atualizarPreviewPromo()" />
+          <p class="label-hint">Aparece antes dos produtos. Ex: "Promoção da semana" ou "Novidade".</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <strong style="font-size:0.9rem; display:block; margin-bottom:16px;">🛒 Produto 1</strong>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome do produto</label>
+            <input type="text" id="promo-p1-nome" placeholder="ex: Detergentes" oninput="atualizarPreviewPromo()" />
+          </div>
+          <div class="form-group">
+            <label>Preço</label>
+            <input type="text" id="promo-p1-preco" placeholder="ex: 8,50€" oninput="atualizarPreviewPromo()" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Detalhe (opcional)</label>
+          <input type="text" id="promo-p1-detalhe" placeholder="ex: (5 litros)" oninput="atualizarPreviewPromo()" />
+          <p class="label-hint">Aparece a seguir ao preço em letras mais pequenas.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <strong style="font-size:0.9rem; display:block; margin-bottom:16px;">🛒 Produto 2 (opcional)</strong>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome do produto</label>
+            <input type="text" id="promo-p2-nome" placeholder="ex: Amaciadores" oninput="atualizarPreviewPromo()" />
+          </div>
+          <div class="form-group">
+            <label>Preço</label>
+            <input type="text" id="promo-p2-preco" placeholder="ex: 7,50€" oninput="atualizarPreviewPromo()" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Detalhe (opcional)</label>
+          <input type="text" id="promo-p2-detalhe" placeholder="ex: (5 litros)" oninput="atualizarPreviewPromo()" />
+        </div>
+
+        <div class="divider"></div>
+
+        <label style="margin-bottom:8px; display:block;">Pré-visualização</label>
+        <div style="background:#c9970a; padding:14px 24px; border-radius:8px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;" id="promo-preview-box">
+          <span style="font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.8; color:#1a1508;" id="promo-preview-badge">Promoção da semana</span>
+          <span id="promo-preview-conteudo" style="color:#1a1508; font-size:0.95rem;"></span>
+        </div>
+        <p class="label-hint mt-2">Esta é a aparência real da faixa no site.</p>
+      </div>
+    </section>
+
+    <!-- ─── PREÇOS ─── -->
+    <section class="section-panel" id="panel-precos">
+      <div class="page-title">
+        <h1>💶 Lista de Preços</h1>
+        <p>Altere os preços de qualquer artigo. Pode também adicionar ou remover artigos.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span>💶</span> Preços por Categoria</div>
+          <button class="btn btn-primary" onclick="adicionarCategoria()">+ Nova Categoria</button>
+        </div>
+
+        <div class="alert alert-info">
+          <span>ℹ️</span>
+          <span>Clique no nome de uma categoria para a expandir ou fechar. Use o botão <b>+ Adicionar Artigo</b> para criar novos itens.</span>
+        </div>
+
+        <div id="precos-container">
+          <!-- Gerado por JS -->
+        </div>
+      </div>
+    </section>
+
+<!-- ─── TOGGLES ─── -->
+    <section class="section-panel" id="panel-toggles">
+      <div class="page-title">
+        <h1>⚙️ Funcionalidades</h1>
+        <p>Ligue ou desligue secções e funcionalidades do site.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span>⚙️</span> O que está visível no site</div>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Faixa de Promoção</strong>
+            <span>A barra colorida no topo com a promoção actual</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-promo" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Botão WhatsApp</strong>
+            <span>O botão verde flutuante no canto inferior direito</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-whatsapp" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Secção de Avaliações Google</strong>
+            <span>Mostra as estrelas e avaliação do Google</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-avaliacoes" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Calculadora de Preços</strong>
+            <span>Permite ao cliente calcular o preço estimado</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-calculadora" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Formulário de Recolha ao Domicílio</strong>
+            <span>Pedidos de recolha em casa pelo cliente</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-recolha" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Secção de Estatísticas</strong>
+            <span>Anos de experiência, clientes, etc.</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-stats" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-group">
+          <div class="toggle-info">
+            <strong>Mapa na Página de Contacto</strong>
+            <span>Mapa interactivo com a localização da lavandaria</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="tg-mapa" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+</main>
+</div>
+
+<!-- BOTÃO GUARDAR GLOBAL -->
+<button class="btn-guardar-tudo" id="btn-guardar" onclick="guardarTudo()">
+  💾 Guardar Tudo
+</button>
+
+<script>
+// ═══════════════════════════════════════════════
+// CONFIGURAÇÃO
+// ═══════════════════════════════════════════════
+const PASSWORD = 'pelicano2024';
+const API_URL = '/api/config'; // Proxy Netlify
+
+// Estado global dos dados
+let dados = null;
+let alterado = false;
+
+// ═══════════════════════════════════════════════
+// LOGIN
+// ═══════════════════════════════════════════════
+function tentarLogin() {
+  const pass = document.getElementById('pass-input').value;
+  if (pass === PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    inicializar();
+  } else {
+    document.getElementById('login-erro').textContent = '❌ Palavra-passe incorrecta. Tente novamente.';
+    document.getElementById('pass-input').value = '';
+    document.getElementById('pass-input').focus();
+  }
+}
+
+document.getElementById('pass-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') tentarLogin();
+});
+
+function sair() {
+  if (alterado && !confirm('Tem alterações por guardar. Tem a certeza que quer sair?')) return;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pass-input').value = '';
+}
+
+// ═══════════════════════════════════════════════
+// DADOS PADRÃO
+// ═══════════════════════════════════════════════
+function dadosPadrao() {
+  return {
+    _versao: 1,
+    _atualizado: new Date().toISOString(),
+    promocao: {
+      ativa: true,
+      badge: 'Promoção da semana',
+      p1: { nome: 'Detergentes', preco: '8,50€', detalhe: '(5 litros)' },
+      p2: { nome: 'Amaciadores', preco: '7,50€', detalhe: '(5 litros)' }
+    },
+    precos: [
+      {
+        id: 'vestuario', emoji: '👔', nome: 'Vestuário',
+        nota: 'Veludo, bombazine, linho e seda acresce 0,50€ por peça. Também fazemos tratamento Barbour.',
+        itens: [
+          { nome: 'Fato', preco: '10,00€' },
+          { nome: 'Fato c/ Colete', preco: '14,00€' },
+          { nome: 'Caça', preco: '5,00€' },
+          { nome: 'Colete', preco: '4,50€' },
+          { nome: 'Saia', preco: 'Desde 5,00€' },
+          { nome: 'Blusa', preco: 'Desde 5,00€' },
+          { nome: 'Gravata', preco: '4,50€' },
+          { nome: 'Sobretudo', preco: 'Desde 10,00€' },
+          { nome: 'Gabardine L.I.', preco: 'Desde 12,00€' },
+          { nome: 'Casaco', preco: 'Desde 6,00€' },
+          { nome: 'Samarra', preco: '20,00€' },
+          { nome: 'Lenços de seda', preco: 'Desde 5,00€' },
+          { nome: 'Camisolas', preco: 'Desde 4,50€' },
+          { nome: 'Vestidos', preco: 'Desde 10,00€' },
+          { nome: 'T-Shirt', preco: '3,00€' },
+          { nome: 'Echarpes', preco: 'Desde 7,50€' },
+          { nome: 'Blusão Penas', preco: 'Desde 12,50€' },
+          { nome: 'Macacão', preco: 'Desde 10,00€' },
+          { nome: 'Vestidos Cerimónia', preco: 'Só à vista' },
+          { nome: 'Vestidos Noiva', preco: 'Só à vista' },
+          { nome: 'Camisa', preco: 'Desde 3,50€' },
+          { nome: 'Batas', preco: '4,00€' },
+          { nome: 'Calção', preco: 'Desde 4,00€' },
+          { nome: 'Túnica', preco: 'Desde 6,00€' },
+          { nome: 'Blusões', preco: 'Desde 10,00€' },
+          { nome: 'Saia plissada', preco: '7,50€' },
+          { nome: 'Smoking', preco: '12,50€' },
+          { nome: 'Roupão', preco: 'Desde 8,00€' },
+          { nome: 'Polos', preco: 'Desde 3,50€' },
+          { nome: 'Sweat', preco: 'Desde 4,50€' },
+          { nome: 'Parka L.I.', preco: 'Desde 10,00€' },
+          { nome: 'Trajes Académicos (4pcs)', preco: '18,50€' },
+          { nome: 'Casacos imitação pele', preco: 'Desde 19,00€' },
+          { nome: 'Fraque – 3 peças', preco: 'Desde 19,00€' }
+        ]
+      },
+      {
+        id: 'peles', emoji: '🧥', nome: 'Peles',
+        nota: '',
+        itens: [
+          { nome: 'Casaco Antílope', preco: 'Desde 50€' },
+          { nome: 'Saia Antílope', preco: 'Desde 35€' },
+          { nome: 'Casaco Antílope 3/4', preco: 'Desde 75€' },
+          { nome: 'Colete Antílope', preco: 'Desde 35€' },
+          { nome: 'Casaco Antílope Comprido', preco: 'Desde 100€' },
+          { nome: 'Carteira Antílope', preco: 'Desde 30€' },
+          { nome: 'Casaco Couro lavar e pintar', preco: 'Desde 60€' },
+          { nome: 'Saia Couro só lavar', preco: 'Desde 25,00€' },
+          { nome: 'Calça Couro só lavar', preco: 'Desde 30,00€' },
+          { nome: 'Calça Couro lavar e pintar', preco: 'Só à vista' },
+          { nome: 'Saia Couro lavar e pintar', preco: 'Só à vista' },
+          { nome: 'Casaco Nobuk', preco: 'Desde 55€' },
+          { nome: 'Golas', preco: 'Desde 10€' },
+          { nome: 'Luvas', preco: 'Desde 12,50€' },
+          { nome: 'Sapatilhas', preco: 'Desde 20€' },
+          { nome: 'Calça Antílope', preco: 'Desde 30€' }
+        ]
+      },
+      {
+        id: 'carpetes', emoji: '🏠', nome: 'Carpetes',
+        nota: '',
+        itens: [
+          { nome: 'Arraiolos', preco: 'Desde 12€/kg' },
+          { nome: 'Lã', preco: 'Desde 12€/kg' },
+          { nome: 'Perça', preco: 'Desde 12€/kg' },
+          { nome: 'Turca', preco: 'Desde 12€/kg' },
+          { nome: 'Capas de Cavalo', preco: '17,50€' },
+          { nome: 'Carpete finas / baixa', preco: 'Desde 9€/kg' },
+          { nome: 'Tratamento anti-traça, manchado e extra lavagem intensiva', preco: '15€/kg' }
+        ]
+      },
+      {
+        id: 'neve', emoji: '❄️', nome: 'Neve',
+        nota: 'Outras peças sob consulta. Calçado: só à vista.',
+        itens: [
+          { nome: 'Luvas', preco: 'Desde 6€' },
+          { nome: 'Calça Criança', preco: 'Desde 9,50€' },
+          { nome: 'Calça', preco: 'Desde 12€' },
+          { nome: 'Calçado', preco: 'Só à vista' },
+          { nome: 'Macacão Criança', preco: 'Desde 15€' },
+          { nome: 'Macacão', preco: 'Desde 22,50€' },
+          { nome: 'Blusão Criança', preco: 'Desde 12,50€' },
+          { nome: 'Blusão', preco: 'Desde 17,50€' }
+        ]
+      },
+      {
+        id: 'texteis', emoji: '🛏️', nome: 'Têxteis Lar',
+        nota: '',
+        itens: [
+          { nome: 'Edredons', preco: 'Desde 17,50€' },
+          { nome: 'Edredons Penas', preco: 'Desde 25€' },
+          { nome: 'Colcha crochet', preco: 'Desde 6€/kg' },
+          { nome: 'Colcha Seda/Linho', preco: 'Desde 30€' },
+          { nome: 'Colcha de Algodão', preco: 'Desde 20€' },
+          { nome: 'Mantas', preco: 'Desde 10€' },
+          { nome: 'Roupa Branca', preco: '4€/kg' },
+          { nome: 'Sacos Cama', preco: 'Desde 10,00€' },
+          { nome: 'Cobertor pelo/Lã', preco: 'Desde 12€' },
+          { nome: 'Cortinados/Cortinas', preco: 'Só à vista' },
+          { nome: 'Estores e Telas', preco: 'Só à vista' },
+          { nome: 'Almofadas', preco: 'Desde 8€' },
+          { nome: 'Resguardos de Colchão', preco: 'Desde 25€' },
+          { nome: 'Capas de Sofá', preco: 'Só à vista' },
+          { nome: 'Capas de Edredon', preco: 'Desde 10,00€' },
+          { nome: 'Cobertores', preco: 'Desde 10€' }
+        ]
+      },
+      {
+        id: 'passar', emoji: '♨️', nome: 'Só Passar / Secar',
+        nota: '',
+        itens: [
+          { nome: 'Calça / Saia', preco: 'Desde 3€' },
+          { nome: 'Blusas / Camisas', preco: 'Desde 3€' },
+          { nome: 'Casaco', preco: 'Desde 4,50€' },
+          { nome: 'Fato', preco: '7€' },
+          { nome: 'T-Shirt', preco: 'Desde 2€' },
+          { nome: 'Polos', preco: 'Desde 2€' },
+          { nome: 'Roupa Branca – Lisos', preco: '3,50€/kg' },
+          { nome: 'Roupa Diversa só para passar', preco: '2,50€/kg' }
+        ]
+      }
+    ],
+    contactos: {
+      rua: 'Rua da Natária, 73',
+      cp: '4250-327',
+      cidade: 'Porto',
+      referencia: 'ao Carvalhido',
+      telefone: '228 314 574',
+      whatsapp: '351228314574',
+      email: 'lavandariapelicano@gmail.com',
+      facebook: 'https://facebook.com/lavandaria.pelicano',
+      pagamentos: 'MBWay, Dinheiro, Transferência Bancária'
+    },
+    textos: {
+      fundacao: 1974,
+      slogan: 'Qualidade e tradição desde 1974',
+      descricao: 'A Lavandaria Pelicano serve o Porto com qualidade e confiança desde 1974.',
+      heroTitulo: 'Especialistas em limpeza a seco de todo o vestuário',
+      heroSub: 'Tratamos das suas peças com o cuidado que merecem.',
+      heroBtn: 'Ver preços',
+      ctTitulo: 'Entre em Contacto Connosco',
+      ctSub: 'Estamos sempre disponíveis para responder às suas questões.'
+    },
+    cores: {
+      escura: '#1a1508',
+      dourada: '#d4a017',
+      cream: '#faf6ee'
+    },
+    toggles: {
+      promo: document.getElementById('tg-promo').checked,
+      whatsapp: document.getElementById('tg-whatsapp').checked,
+      avaliacoes: document.getElementById('tg-avaliacoes').checked,
+      calculadora: document.getElementById('tg-calculadora').checked,
+      recolha: document.getElementById('tg-recolha').checked,
+      stats: document.getElementById('tg-stats').checked,
+      mapa: document.getElementById('tg-mapa').checked
+    },
+    seo: {
+      titulo: document.getElementById('seo-titulo').value.trim(),
+      descricao: document.getElementById('seo-descricao').value.trim(),
+      keywords: document.getElementById('seo-keywords').value.trim(),
+      ogTitulo: document.getElementById('seo-og-titulo').value.trim(),
+      ogDesc: document.getElementById('seo-og-desc').value.trim(),
+      url: document.getElementById('seo-url').value.trim()
+    }
+  };
+}
+
+// ═══════════════════════════════════════════════
+// GUARDAR TUDO
+// ═══════════════════════════════════════════════
+async function guardarTudo() {
+  const btn = document.getElementById('btn-guardar');
+  btn.disabled = true;
+  btn.textContent = '⏳ A guardar...';
+  setStatus('saving', 'A guardar...');
+
+  try {
+    dados = recolherDados();
+    await guardarDados(dados);
+    setStatus('ok', 'Guardado ✓');
+    alterado = false;
+
+    // Actualizar timestamp
+    const agora = new Date();
+    document.getElementById('stat-sync').textContent =
+      agora.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+
+    atualizarEstatisticasDash();
+    toast('✅ Todas as alterações foram guardadas!', 'ok');
+  } catch (err) {
+    setStatus('erro', 'Erro ao guardar');
+    toast('❌ Erro ao guardar. Verifique a ligação à internet.', 'erro');
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '💾 Guardar Tudo';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// ESTATÍSTICAS DO DASHBOARD
+// ═══════════════════════════════════════════════
+function atualizarEstatisticasDash() {
+  if (!dados) return;
+  let total = 0;
+  dados.precos.forEach(cat => total += cat.itens.length);
+  document.getElementById('stat-num-precos').textContent = total;
+  document.getElementById('stat-ano').textContent = dados.textos?.fundacao || 1974;
+}
+
+// ═══════════════════════════════════════════════
+// MARCAR ALTERADO
+// ═══════════════════════════════════════════════
+function marcarAlterado() {
+  alterado = true;
+}
+
+// Listener genérico para todos os inputs/textareas/selects
+document.addEventListener('input', (e) => {
+  if (e.target.matches('input, textarea, select')) marcarAlterado();
+});
+document.addEventListener('change', (e) => {
+  if (e.target.matches('input, textarea, select')) marcarAlterado();
+});
+
+// Avisar antes de fechar a página com alterações
+window.addEventListener('beforeunload', (e) => {
+  if (alterado) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+// ═══════════════════════════════════════════════
+// NAVEGAÇÃO SIDEBAR
+// ═══════════════════════════════════════════════
+function irPara(secao) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+
+  const panel = document.getElementById('panel-' + secao);
+  if (panel) panel.classList.add('active');
+
+  const item = [...document.querySelectorAll('.sidebar-item')]
+    .find(el => el.getAttribute('onclick') === `irPara('${secao}')`);
+  if (item) item.classList.add('active');
+}
+
+
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function toast(mensagem, tipo = 'info') {
+  const container = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  el.className = `toast toast-${tipo}`;
+  el.textContent = mensagem;
+  container.appendChild(el);
+  setTimeout(() => {
+    el.style.animation = 'slideOut 0.3s ease forwards';
+    setTimeout(() => el.remove(), 300);
+  }, 3500);
+}
+
+// ═══════════════════════════════════════════════
+// LOADING
+// ═══════════════════════════════════════════════
+function mostrarLoading(msg = 'A carregar...') {
+  document.getElementById('loading-msg').textContent = msg;
+  document.getElementById('loading-overlay').style.display = 'flex';
+}
+
+function esconderLoading() {
+  document.getElementById('loading-overlay').style.display = 'none';
+}
+</script>
+</body>
+</html>
