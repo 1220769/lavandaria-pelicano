@@ -1,6 +1,6 @@
 // ── WHATSAPP FLUTUANTE ────────────────────────────
 // Substitui pelo número real com código de país (sem espaços ou símbolos)
-const WHATSAPP_NUMBER = '351929323377';
+const WHATSAPP_NUMBER = '351936547743';
 const WHATSAPP_MESSAGE = 'Olá! Gostaria de obter mais informações sobre os vossos serviços de lavandaria.';
 
 function createWhatsAppButton() {
