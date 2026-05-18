@@ -1,5 +1,3 @@
-// Fonte única de verdade para todos os preços.
-// Para alterar um preço, edita apenas aqui.
 
 const PRICES = {
   vestuario: {
