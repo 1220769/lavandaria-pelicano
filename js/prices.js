@@ -72,9 +72,9 @@ const PRICES = {
       { nome: "Lã",                           preco: "Desde 12,50€/kg" },
       { nome: "Perça",                        preco: "Desde 12,50€/kg" },
       { nome: "Turca",                        preco: "Desde 12,50€/kg" },
-      { nome: "Capas de Cavalo",              preco: "17,50€/kg" },
+      { nome: "Capas de Cavalo",              preco: "Desde 17,50€/kg" },
       { nome: "Carpete finas / baixa",        preco: "Desde 10,00€/kg" },
-      { nome: "Tratamento anti-traça, manchado e extra lavagem intensiva", preco: "15,00€/kg" },
+      { nome: "Tratamento anti-traça, manchado e extra lavagem intensiva", preco: "Desde 15,00€/kg" },
     ]
   },
 
